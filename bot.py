@@ -1,5 +1,6 @@
 import telebot
 import sqlite3
+import re
 
 bot = telebot.TeleBot('1730912703:AAEJDYn2Eh68NahmEXeIuWNwOS6cAQ6f2rw')
 
@@ -27,18 +28,26 @@ conn.commit()
 
 @bot.message_handler(content_types=['sticker'])
 def start(message):
-    print(message.sticker)
+
     username = message.reply_to_message.from_user.first_name
+
     if message.sticker.thumb.file_unique_id == 'AQAD16puBgAENEwAAg':
         bot.send_message(-1001164820292, username + ' гей')
 
     elif message.sticker.thumb.file_unique_id == "AQADuhVtBgAEaU0AAg":
         bot.send_message(-1001164820292, username + ' крутой')
 
+
 @bot.message_handler(content_types=['text'])
 def send_message(message):
+
+    id = message.message_id
     mes = message.text
+
     if message.chat.id == 529158582:
         bot.send_message(-1001164820292, mes)
+
+    elif '=)' in message.text or '=(' in message.text:
+        bot.delete_message(-1001164820292, id)
 
 bot.polling(none_stop=True)
