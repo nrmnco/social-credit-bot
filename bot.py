@@ -17,10 +17,12 @@ dict = {
     "balausa": 200,
     "muslim": 200,
 }
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['points'])
 def start(message):
-    bot.send_message(-1001164820292, dict)
-
+    lst = ''
+    for key in dict:
+        lst += key + ' ' + str(dict[key]) + '\n'
+    bot.send_message(-1001164820292, lst)
 
 @bot.message_handler(content_types=['sticker'])
 def send_sticker(message):
