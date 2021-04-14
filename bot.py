@@ -4,7 +4,7 @@ import re
 
 bot = telebot.TeleBot('token')
 
-dict = {
+mydict = {
     "joe": 200,
     "Nariman": 200,
     "Багдат": 200,
