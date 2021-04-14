@@ -2,7 +2,7 @@ import telebot
 import time
 import re
 
-bot = telebot.TeleBot('1730912703:AAEJDYn2Eh68NahmEXeIuWNwOS6cAQ6f2rw')
+bot = telebot.TeleBot('token')
 
 dict = {
     "joe": 200,
