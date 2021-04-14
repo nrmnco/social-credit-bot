@@ -39,13 +39,13 @@ def send_sticker(message):
 
             if message.sticker.thumb.file_unique_id == 'AQAD16puBgAENEwAAg':
                 dict[message.reply_to_message.from_user.first_name] -= 20
-                bot.send_message(-1001164820292,
+                bot.send_message(message.chat.id,
                                  message.reply_to_message.from_user.first_name + ' ебать ты лошара получай -20 ачьков\nУ тебя осталось ' +
                                  str(dict[message.reply_to_message.from_user.first_name]) + ' ачьков')
 
             elif message.sticker.thumb.file_unique_id == 'AQADuhVtBgAEaU0AAg':
                 dict[message.reply_to_message.from_user.first_name] += 20
-                bot.send_message(-1001164820292,
+                bot.send_message(message.chat.id,
                                  message.reply_to_message.from_user.first_name + ' брат уважуха от души +20 ачьков\nУ тебя осталось ' +
                                  str(dict[message.reply_to_message.from_user.first_name]) + ' ачьков')
     except Exception:
@@ -60,12 +60,12 @@ def send_message(message):
     if message.chat.id == 529158582 or message.chat.id == 406340756 or message.chat.id == 1257906397:
         bot.send_message(-1001164820292, message.text)
     elif '=)' in message.text or '=(' in message.text or ')=' in message.text or '(=' in message.text:
-        bot.delete_message(-1001164820292, message.message_id)
+        bot.delete_message(message.chat.id, message.message_id)
 
 @bot.edited_message_handler(content_types=['text'])
 def handler_function(message):
     if '=)' in message.text or '=(' in message.text or ')=' in message.text or '(=' in message.text:
-        bot.delete_message(-1001164820292, message.message_id)
+        bot.delete_message(message.chat.id2, message.message_id)
 
 
 
