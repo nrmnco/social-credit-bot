@@ -1,5 +1,5 @@
 import mysql.connector
-
+from datetime import datetime
 
 
 class Database:
@@ -51,3 +51,31 @@ class Database:
                 return [['300'],]
             else:
                 return res
+
+
+    def add_last_sticker_time(self, chat_id):
+        with self.connection.cursor() as cursor:
+            now = datetime.now()
+            cursor.execute('select last_sticker_time from time_restriction where  user_id = %s', (chat_id,))
+            time = cursor.fetchone()
+            if time == None:
+                cursor.execute('insert into time_restriction (user_id, last_sticker_time) values(%s, %s)', (chat_id, now,))
+                self.connection.commit()
+            else:
+                cursor.execute('update time_restriction set last_sticker_time = %s where user_id = %s', (now, chat_id))
+                self.connection.commit()    
+
+    def get_last_sticker_time(self, chat_id):
+        with self.connection.cursor() as cursor:
+            cursor.execute('select last_sticker_time from time_restriction where  user_id = %s', (chat_id,))
+            time = cursor.fetchone()
+            if time == None:
+                return datetime(1000, 1, 1, 0, 0, 0)
+            else:
+                return time[0]
+        
+
+
+
+
+
