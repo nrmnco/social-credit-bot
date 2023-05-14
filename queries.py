@@ -12,6 +12,7 @@ class Database:
             )
         self.cursor = self.connection.cursor()
         
+
     def subtract_point(self, chat_id):
         with self.connection.cursor() as cursor:
 
@@ -25,7 +26,8 @@ class Database:
                 cursor.execute('insert into users (user_id, social_credit) values(%s, 299)', (chat_id,))
                 self.connection.commit()
             
-    def adding_point(self, chat_id):
+
+    def add_point(self, chat_id):
         with self.connection.cursor() as cursor:
 
             cursor.execute('update users set social_credit = social_credit + 5 where user_id = %s',(chat_id,))
@@ -38,9 +40,8 @@ class Database:
                 cursor.execute('insert into users (user_id, social_credit) values(%s, 301)', (chat_id,))
                 self.connection.commit()
 
-
     
-    def show_point(self, chat_id):
+    def get_point(self, chat_id):
         with self.connection.cursor() as cursor:
             cursor.execute('select social_credit from users where user_id = %s', (chat_id,))
             res = cursor.fetchall()
@@ -65,6 +66,7 @@ class Database:
                 cursor.execute('update time_restriction set last_sticker_time = %s where user_id = %s', (now, chat_id))
                 self.connection.commit()    
 
+
     def get_last_sticker_time(self, chat_id):
         with self.connection.cursor() as cursor:
             cursor.execute('select last_sticker_time from time_restriction where  user_id = %s', (chat_id,))
@@ -74,8 +76,5 @@ class Database:
             else:
                 return time[0]
         
-
-
-
 
 
